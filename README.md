@@ -125,6 +125,47 @@ npm install @aws-amplify/ui-vue aws-amplify
 amplify init
 ```
 
+```shell
+# Some next steps:
+
+# Show you what you've added already and 
+# if it's locally configured or deployed
+amplify status 
+
+# will allow you to add features like user login or a backend API
+amplify add <category>
+
+#  will build all your local backend resources and 
+#  provision it in the cloud
+amplify push
+
+# to open the Amplify Console and view your project status
+amplify console
+
+# will build all your local backend and frontend resources 
+# (if you have hosting category added) and 
+# provision it in the cloud
+amplify publish
+
+# Pro tip:
+# Try 
+amplify add api
+# to create a backend API 
+# and then
+amplify push
+# to deploy everything
+
+```
+
+When the initialization is complete...
+
+You will have **two additional resources** 
+created for you in your project: 
+
+1. a file called `aws-exports.js` located in the `src` directory and 
+2. a folder named `amplify` located in your root directory. 
+   3. 
+
 ###### 1. 
 
 ```shell
