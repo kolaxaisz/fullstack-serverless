@@ -164,23 +164,19 @@ created for you in your project:
 
 1. a file called `aws-exports.js` located in the `src` directory and 
 2. a folder named `amplify` located in your root directory. 
-   3. 
-
-###### 1. 
-
-```shell
-
-```
-
-
-
+   - This folder holds all of the _code_ and _configuration_ files for your 
+   Amplify project. In this folder you’ll see **two subfolders**: 
+     - the `backend`
+       - This folder contains all of the local code for your project such as 
+         - the _**GraphQL schema**_ for an AppSync API, 
+         - the _**source code**_ for any serverless functions, and 
+         - _**infrastructure as code**_ representing the current local status of the Amplify project.
+     - `#current-cloud-backend` folders.
+       - This folder holds the **_code_** and **configurations** 
+         - that reflect what resources were deployed in the cloud with your last Amplify `push` command. 
+         - It helps the CLI differentiate between the configuration of the resources already provisioned in the cloud and what is currently in your local backend directory
 
 #### 1.3.3. - Creating and Deploying Your First Service
-#### 1.3.4. - Deleting the Resources
-
-
-
-
 
 To create a new user and configure the CLI, you’ll run the configure command:
 
@@ -196,11 +192,14 @@ npm install aws-amplify @aws-amplify/ui-react
 amplify init
 ```
 
-### Creating and Deploying Service
+
+To create a new service, you can use the `add` command from [Amplify](https://ui.docs.amplify.aws/vue/connected-components/authenticator)
 
 ```shell
 amplify add auth
 ```
+
+Follow the prompts to add authentication to your backend configuration.
 
 ```shell
 amplify push
@@ -208,9 +207,60 @@ amplify push
 
 - https://docs.amplify.aws/
 - https://ui.docs.amplify.aws/react
+- https://ui.docs.amplify.aws/?platform=vue
+- https://ui.docs.amplify.aws/vue/connected-components/authenticator
 
-```shell
-npm i --save aws-amplify
-npm i --save @aws-amplify/ui-react
+Test it out...
+
+###### React
+
+> `ch01/react/src/index.js`
+```jsx
+// ...
+import { Amplify } from 'aws-amplify'
+import config from './aws-exports'
+
+Amplify.configure(config)
+// ..
 ```
 
+> `ch01/react/src/App.js`
+
+```jsx
+// ...
+function App() {
+  return (
+    <div className="App">
+      <h1>Hello from AWS Amplify</h1>
+      <Authenticator>
+        {({ signOut, user }) => (
+          <div className="App">
+            <p>
+              Hey {user.username}, welcome to my channel, with auth!
+            </p>
+            <button onClick={signOut}>Sign out</button>
+          </div>
+        )}
+      </Authenticator>
+    </div>
+  );
+}
+// ...
+```
+
+###### Vue
+
+- <https://ui.docs.amplify.aws/vue/connected-components/authenticator>
+
+#### 1.3.4. - Deleting the Resources
+
+To remove an individual feature
+```shell
+amplify remove auth
+```
+
+Delete an entire Amplify project:
+
+```shell
+amplify delete
+```
